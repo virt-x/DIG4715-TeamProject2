@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Balloon
+  - Guard
+  - Shield
+  - Chalice
+  - Fire
+  - Exit
+  - HotSpot
   layers:
   - Default
   - TransparentFX
