@@ -6,6 +6,7 @@ public class FireballController : MonoBehaviour
 {
     private GameObject player;
     private Rigidbody body;
+    public AudioSource soundBlock;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,7 @@ public class FireballController : MonoBehaviour
     {
         if (collider.CompareTag("Shield"))
         {
+            Instantiate(soundBlock, transform.position, transform.rotation);
             player.GetComponent<PlayerController>().ShieldBlock();
             Destroy(gameObject);
         }

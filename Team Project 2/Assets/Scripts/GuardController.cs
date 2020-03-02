@@ -10,6 +10,7 @@ public class GuardController : MonoBehaviour
     public GameObject sight, breath, fireball;
     public Light mouthLight;
     public float baseSpeed;
+    public AudioSource soundStomp, soundSpit, soundGasp, soundBreath, soundWhimper, soundGrunt;
     private float haste, stunTime, searchTime, fireballCooldown, spitTime, breathTime;
     public bool stun;
     private bool kill;
@@ -187,7 +188,14 @@ public class GuardController : MonoBehaviour
 
     void Searching()
     {
-        agent.SetDestination(RollHotSpot().transform.position);
+        if (!LineOfSight())
+        {
+            agent.SetDestination(RollHotSpot().transform.position);
+        }
+        else
+        {
+            agent.SetDestination(player.transform.position);
+        }
         agent.isStopped = false;
         animator.SetBool("Walking", true);
     }
@@ -239,12 +247,14 @@ public class GuardController : MonoBehaviour
     void ActivateBreath()
     {
         breath.SetActive(true);
+        soundBreath.gameObject.SetActive(true);
         mouthLight.range = 5;
     }
 
     void DeactivateBreath()
     {
         breath.SetActive(false);
+        soundBreath.gameObject.SetActive(false);
         mouthLight.range = 0.5f;
     }
 
@@ -256,6 +266,28 @@ public class GuardController : MonoBehaviour
     void Ignite()
     {
         player.fire = true;
+    }
+
+    void PlayUnattachedSound(int sound)
+    {
+        switch (sound)
+        {
+            case 1:
+                Instantiate(soundStomp, transform.position, transform.rotation);
+                break;
+            case 2:
+                Instantiate(soundSpit, transform.position, transform.rotation);
+                break;
+            case 3:
+                Instantiate(soundGrunt, transform.position, transform.rotation);
+                break;
+            case 4:
+                Instantiate(soundWhimper, transform.position, transform.rotation);
+                break;
+            case 5:
+                Instantiate(soundGasp, transform.position, transform.rotation);
+                break;
+        }
     }
 
     IEnumerator FaceMe(GameObject target)

@@ -25,7 +25,9 @@ ModelImporter:
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: Event ActivateBreath has a time (1.483333) outside the
-      clip's valid range (0.000000..1.483333). It will never be fired
+      clip's valid range (0.000000..1.483333). It will never be firedEvent Ignite
+      has a time (1.483333) outside the clip's valid range (0.000000..1.483333). It
+      will never be fired
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -78,6 +80,14 @@ ModelImporter:
           type: 3}
         floatParameter: 0
         intParameter: 0
+        messageOptions: 0
+      - time: 0.50423735
+        functionName: PlayUnattachedSound
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: c47267aa8b3de6647a3f1e2851cf30d3,
+          type: 3}
+        floatParameter: 0
+        intParameter: 5
         messageOptions: 0
       transformMask: []
       maskType: 3

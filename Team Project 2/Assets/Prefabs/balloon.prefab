@@ -156,6 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 2766316571689725379}
   milk: {fileID: 2092684237502788337, guid: db1d0c05fa0ff8344b258d89407d5f2c, type: 3}
+  soundPop: {fileID: 8570639350094642760, guid: 75c92c81210b0d14788fc706be1d309d,
+    type: 3}
 --- !u!1 &6426141587742781941
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class BalloonController : MonoBehaviour
 {
     public Rigidbody body;
     public GameObject milk;
+    public AudioSource soundPop;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class BalloonController : MonoBehaviour
         if (!collision.collider.CompareTag("Player"))
         {
             Instantiate(milk, transform.position, transform.rotation);
+            Instantiate(soundPop, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
@@ -33,6 +35,7 @@ public class BalloonController : MonoBehaviour
         {
             collider.gameObject.SetActive(false);
             Instantiate(milk, transform.position, transform.rotation);
+            Instantiate(soundPop, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

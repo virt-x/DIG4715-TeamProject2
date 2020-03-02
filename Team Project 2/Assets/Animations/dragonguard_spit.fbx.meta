@@ -64,7 +64,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.24152541
+        functionName: PlayUnattachedSound
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 5
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -101,6 +108,14 @@ ModelImporter:
           type: 3}
         floatParameter: 0
         intParameter: 0
+        messageOptions: 0
+      - time: 0.4872882
+        functionName: PlayUnattachedSound
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: c47267aa8b3de6647a3f1e2851cf30d3,
+          type: 3}
+        floatParameter: 0
+        intParameter: 2
         messageOptions: 0
       transformMask: []
       maskType: 3

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public PlayerMovement mover;
     public MeshRenderer exit;
     public Material exitMaterial;
+    public AudioSource soundKnock, soundSear, soundThrow, soundOpen, soundMagic, soundBurn, soundPop, soundChalice, soundWin;
     private float shieldHeat, inputCooldown, invisibleTime, time, timeOffset, fireTime;
     private int balloonInventory;
     private bool scrollUsed, shieldDisabled, win = false;
@@ -90,6 +91,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetAxisRaw("Fire1") > 0.9f && equipped == 1)
             {
                 torch.GetComponent<Animator>().SetTrigger("Noise");
+                PlaySound(1);
                 inputCooldown = Time.time + 0.25f;
             }
             if (Input.GetAxisRaw("Fire2") > 0.9f && equipped == 1)
@@ -113,6 +115,7 @@ public class PlayerController : MonoBehaviour
                 uiShieldMeter.color = new Color(1, 0, 0, 0.5f);
                 if (equipped == 1)
                 {
+                    PlaySound(2);
                     equipped = 0;
                     UpdateUIInventory();
                     shield.SetActive(false);
@@ -132,7 +135,8 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetAxisRaw("Fire1") > 0.9f && equipped == 2)
             {
-                Instantiate(thrownBalloon, gameObject.transform.position + transform.forward, new Quaternion(GameObject.FindGameObjectWithTag("MainCamera").transform.rotation.x, GameObject.FindGameObjectWithTag("MainCamera").transform.rotation.y, gameObject.transform.rotation.z, gameObject.transform.rotation.w));
+                PlaySound(3);
+                Instantiate(thrownBalloon, gameObject.transform.position + transform.forward, new Quaternion(GameObject.FindGameObjectWithTag("MainCamera").transform.rotation.x, GameObject.FindGameObjectWithTag("MainCamera").transform.rotation.y, GameObject.FindGameObjectWithTag("MainCamera").transform.rotation.z, gameObject.transform.rotation.w));
                 balloon.SetActive(false);
                 balloonInventory--;
                 UpdateBalloonCount();
@@ -150,6 +154,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetAxisRaw("Fire1") > 0.9f && equipped == 3)
             {
                 scroll.GetComponent<Animator>().SetTrigger("Open");
+                PlaySound(4);
                 inputCooldown = Time.time + 1f;
                 StartCoroutine(HideScroll());
             }
@@ -166,6 +171,7 @@ public class PlayerController : MonoBehaviour
         if (!win)
         {
             FireOverlay.color = new Color(1, 0.5f, 0, fireTime / 5);
+            soundBurn.volume = fireTime / 5;
         }
         if (fireTime > 5)
         {
@@ -225,6 +231,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator SelfPop()
     {
         yield return new WaitForSeconds(0.25f);
+        PlaySound(6);
         Instantiate(milk, balloon.transform.position, balloon.transform.rotation);
         fire = false;
         fireTime = 0;
@@ -240,6 +247,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator HideScroll()
     {
         yield return new WaitForSeconds(1f);
+        PlaySound(5);
         scroll.SetActive(false);
         InvisOverlay.gameObject.SetActive(true);
         invisibleTime = Time.time + 5f;
@@ -304,6 +312,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collider.CompareTag("Chalice"))
         {
+            PlaySound(7);
             chalice = true;
             uiObjective.text = "Objective: Escape by reaching the entrance!";
             Destroy(collider.gameObject);
@@ -326,6 +335,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Win()
     {
+        PlaySound(8);
         for(float i = 0; i < 121; i++)
         {
             fire = false;
@@ -333,7 +343,7 @@ public class PlayerController : MonoBehaviour
             FireOverlay.color = new Color(1, 1, 1, i / 120);
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         UnityEngine.SceneManagement.SceneManager.LoadScene(3);
         yield break;
     }
@@ -384,5 +394,36 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         yield break;
+    }
+
+    void PlaySound(int sound)
+    {
+        switch (sound)
+        {
+            case 1:
+                Instantiate(soundKnock, transform.position, transform.rotation);
+                break;
+            case 2:
+                Instantiate(soundSear, transform.position, transform.rotation);
+                break;
+            case 3:
+                Instantiate(soundThrow, transform.position, transform.rotation);
+                break;
+            case 4:
+                Instantiate(soundOpen, transform.position, transform.rotation);
+                break;
+            case 5:
+                Instantiate(soundMagic, transform.position, transform.rotation);
+                break;
+            case 6:
+                Instantiate(soundPop, transform.position, transform.rotation);
+                break;
+            case 7:
+                Instantiate(soundChalice, transform.position, transform.rotation);
+                break;
+            case 8:
+                Instantiate(soundWin, transform.position, transform.rotation);
+                break;
+        }
     }
 }

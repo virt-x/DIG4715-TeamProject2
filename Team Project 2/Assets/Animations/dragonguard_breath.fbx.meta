@@ -83,6 +83,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0
+        functionName: PlayUnattachedSound
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: c47267aa8b3de6647a3f1e2851cf30d3,
+          type: 3}
+        floatParameter: 0
+        intParameter: 5
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
